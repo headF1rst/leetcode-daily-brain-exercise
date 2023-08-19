@@ -1,22 +1,15 @@
-from collections import defaultdict
+from collections import Counter
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        tmp = []
-        dic = defaultdict(int)
-        
-        for num in nums:
-            dic[num] += 1
-        
+        counter = Counter(nums)
+
         idx = 0
-        for k, v in dic.items():
-            if v == 1:
+        for k, v in counter.items():
+            nums[idx] = k
+            idx += 1
+            if v >= 2:
                 nums[idx] = k
                 idx += 1
-            else:
-                nums[idx] = k
-                idx += 1
-                nums[idx] = k
-                idx += 1
-        
+
         return idx
